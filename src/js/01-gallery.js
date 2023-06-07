@@ -1,8 +1,8 @@
-// Add imports above this line
-import { galleryItems } from './gallery-items';
-// Change code below this line
+
 import SimpleLightbox from "simplelightbox";
 import "simplelightbox/dist/simple-lightbox.min.css";
+import { galleryItems } from './gallery-items';
+
 
 const galleryContainer = document.querySelector('.gallery');
 const gallaryMarkup = createGallaryMarkup(galleryItems);
@@ -17,8 +17,7 @@ function createGallaryMarkup(galleryItems) {
         <a class="gallery__link" href="${original}">
             <img 
             class="gallery__image" 
-            src="${preview}" 
-            data-source="${original}" 
+            src="${preview}"  
             alt="${description}" />
         </a>
         </li>
@@ -27,27 +26,8 @@ function createGallaryMarkup(galleryItems) {
         .join('');
 }
 
-function openModal(event) {
-  event.preventDefault();
-  if (event.target.nodeName !== 'IMG') {
-    return;
-  }
-  const largeImageUrl = event.target.dataset.source;
-
-  const instance = basicLightbox.create(`
-    <img src="${largeImageUrl}"/>
-  `);
-
-  instance.show();
-
-  document.addEventListener('keydown', handleKeyPress);
-
-  function handleKeyPress(event) {
-    if (event.code === 'Escape') {
-      instance.close();
-      document.removeEventListener('keydown', handleKeyPress);
-    }
-  }
-}
-
-galleryContainer.addEventListener('click', openModal);
+const lightbox = new SimpleLightbox('.gallery a', {
+  captions: true,
+  captionsData: 'alt',
+  captionDelay: 250,
+});
