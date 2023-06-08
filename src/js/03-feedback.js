@@ -7,9 +7,10 @@ const storageKey = 'feedback-form-state';
 
 const saveFormState = () => {
 const formState = {
-email: emailInput.value,
-message: messageInput.value,
+    email: emailInput.value,
+    message: messageInput.value,
 };
+    
 localStorage.setItem(storageKey, JSON.stringify(formState));
 };
 
@@ -19,9 +20,9 @@ messageInput.addEventListener('input', throttle(saveFormState, 500));
 const populateFormFields = () => {
 const savedFormState = localStorage.getItem(storageKey);
 if (savedFormState) {
-const formState = JSON.parse(savedFormState);
-emailInput.value = formState.email;
-messageInput.value = formState.message;
+    const formState = JSON.parse(savedFormState);
+    emailInput.value = formState.email;
+    messageInput.value = formState.message;
 }
 };
 
@@ -31,13 +32,13 @@ form.addEventListener('submit', (e) => {
 e.preventDefault();
 
 if (emailInput.value.trim() === '' || messageInput.value.trim() === '') {
-console.log('Please fill in all fields');
-return;
-    }    
+    alert('Please fill in all fields');
+    return;
+};    
     
 const formState = {
-email: emailInput.value,
-message: messageInput.value,
+    email: emailInput.value,
+    message: messageInput.value,
 };
     
 console.log('Form Data:', formState);
