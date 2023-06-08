@@ -30,14 +30,20 @@ populateFormFields();
 form.addEventListener('submit', (e) => {
 e.preventDefault();
 
+if (emailInput.value.trim() === '' || messageInput.value.trim() === '') {
+console.log('Please fill in all fields');
+return;
+    }    
+    
+const formState = {
+email: emailInput.value,
+message: messageInput.value,
+};
+    
+console.log('Form Data:', formState);
+
 localStorage.removeItem(storageKey);
 
 emailInput.value = '';
 messageInput.value = '';
-
-const formState = {
-email: '',
-message: '',
-};
-console.log('Form Data:', formState);
 });
